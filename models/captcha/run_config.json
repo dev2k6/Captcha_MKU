@@ -1,0 +1,26 @@
+{
+  "manifest_path": "/Users/dev2k6/Workspace/tooling/ai/captcha-mku/data/captcha5000/manifest.json",
+  "manifest_sha256": "1b7f9c79b08e0d8b7ba9c8296e857a382dcba526348a9f422650ccd267024f81",
+  "encoder_path": "/Users/dev2k6/Workspace/tooling/ai/captcha-mku/.venv/lib/python3.13/site-packages/ddddocr/common_old.onnx",
+  "encoder_sha256": "b8f2ad9cbc1f2e3922a6cb9459e30824e7e2467f3fb4fd61420640e34ea0bf68",
+  "epochs": 80,
+  "patience": 35,
+  "batch_size": 64,
+  "augmentations_per_train_sample": 4,
+  "uncertain_label_weight": 1.0,
+  "pretrained_head_learning_rate": 3e-05,
+  "residual_head_learning_rate": 0.001,
+  "weight_decay": 0.001,
+  "seed": 42,
+  "requested_device": "auto",
+  "train_all": true,
+  "skip_onnx": false,
+  "charset": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+  "preprocessing": {
+    "decode_mode": "RGB",
+    "resize_order": "RGB resize with Pillow LANCZOS, then convert to L",
+    "height": 64,
+    "width": "max(1, int(original_width * 64 / original_height))",
+    "normalization": "uint8 grayscale / 255.0"
+  }
+}

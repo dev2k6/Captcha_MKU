@@ -1,0 +1,2095 @@
+{
+  "manifest": "/Users/dev2k6/Workspace/tooling/ai/captcha-mku/data/captcha5000/manifest.json",
+  "sample_counts": {
+    "train": 4800,
+    "validation": 100,
+    "test": 100
+  },
+  "feature_views": {
+    "train": 20000,
+    "validation": 100,
+    "test": 100
+  },
+  "training_uncertain_samples_weighted": 316,
+  "best_epoch": 74,
+  "best_validation_character_error_rate": 0.0,
+  "head_initialization": {
+    "encoder": "/Users/dev2k6/Workspace/tooling/ai/captcha-mku/.venv/lib/python3.13/site-packages/ddddocr/common_old.onnx",
+    "source_classes": 8210,
+    "target_classes_including_blank": 63,
+    "case_preserving": true,
+    "head_initialization": "dequantized finite common_old.onnx MatMulInteger weights and bias"
+  },
+  "device": "mps",
+  "charset": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+  "pretrained_pytorch_checkpoint": {
+    "path": "data/pretrained/ddddocr-crnn.tar",
+    "used": false,
+    "reason": "Downloaded upstream checkpoint contains NaNs in all floating-point model weights."
+  },
+  "metrics": {
+    "validation": {
+      "all_labels": {
+        "exact_correct": 100,
+        "character_errors": 0,
+        "case_insensitive_exact_correct": 100,
+        "case_insensitive_character_errors": 0,
+        "characters": 600,
+        "predictions": [
+          {
+            "id": "000005",
+            "label": "OKiSuf",
+            "prediction": "OKiSuf"
+          },
+          {
+            "id": "000027",
+            "label": "kn6pb4",
+            "prediction": "kn6pb4"
+          },
+          {
+            "id": "000059",
+            "label": "dHzWpt",
+            "prediction": "dHzWpt"
+          },
+          {
+            "id": "000095",
+            "label": "9S43OM",
+            "prediction": "9S43OM"
+          },
+          {
+            "id": "000160",
+            "label": "SloC26",
+            "prediction": "SloC26"
+          },
+          {
+            "id": "000173",
+            "label": "26DHdP",
+            "prediction": "26DHdP"
+          },
+          {
+            "id": "000258",
+            "label": "blwxM4",
+            "prediction": "blwxM4"
+          },
+          {
+            "id": "000386",
+            "label": "cDuQRZ",
+            "prediction": "cDuQRZ"
+          },
+          {
+            "id": "000475",
+            "label": "xst6fV",
+            "prediction": "xst6fV"
+          },
+          {
+            "id": "000483",
+            "label": "KgOyfA",
+            "prediction": "KgOyfA"
+          },
+          {
+            "id": "000521",
+            "label": "vUtvGC",
+            "prediction": "vUtvGC"
+          },
+          {
+            "id": "000525",
+            "label": "KMvKob",
+            "prediction": "KMvKob"
+          },
+          {
+            "id": "000553",
+            "label": "csFrAn",
+            "prediction": "csFrAn"
+          },
+          {
+            "id": "000567",
+            "label": "JwGTMQ",
+            "prediction": "JwGTMQ"
+          },
+          {
+            "id": "000581",
+            "label": "c97UmL",
+            "prediction": "c97UmL"
+          },
+          {
+            "id": "000582",
+            "label": "KVfDKp",
+            "prediction": "KVfDKp"
+          },
+          {
+            "id": "000702",
+            "label": "UzlNli",
+            "prediction": "UzlNli"
+          },
+          {
+            "id": "000745",
+            "label": "TqRUd1",
+            "prediction": "TqRUd1"
+          },
+          {
+            "id": "000872",
+            "label": "HtSqjX",
+            "prediction": "HtSqjX"
+          },
+          {
+            "id": "000899",
+            "label": "Sbztef",
+            "prediction": "Sbztef"
+          },
+          {
+            "id": "000914",
+            "label": "sTjuoi",
+            "prediction": "sTjuoi"
+          },
+          {
+            "id": "000917",
+            "label": "xBo2Ul",
+            "prediction": "xBo2Ul"
+          },
+          {
+            "id": "000939",
+            "label": "XRqOxm",
+            "prediction": "XRqOxm"
+          },
+          {
+            "id": "000992",
+            "label": "65oSpE",
+            "prediction": "65oSpE"
+          },
+          {
+            "id": "001031",
+            "label": "BNkStQ",
+            "prediction": "BNkStQ"
+          },
+          {
+            "id": "001052",
+            "label": "P4DnvO",
+            "prediction": "P4DnvO"
+          },
+          {
+            "id": "001134",
+            "label": "15TE1m",
+            "prediction": "15TE1m"
+          },
+          {
+            "id": "001253",
+            "label": "zfzu3L",
+            "prediction": "zfzu3L"
+          },
+          {
+            "id": "001296",
+            "label": "2nuntD",
+            "prediction": "2nuntD"
+          },
+          {
+            "id": "001311",
+            "label": "rlAvvK",
+            "prediction": "rlAvvK"
+          },
+          {
+            "id": "001324",
+            "label": "SUYfxL",
+            "prediction": "SUYfxL"
+          },
+          {
+            "id": "001353",
+            "label": "7ZbpaF",
+            "prediction": "7ZbpaF"
+          },
+          {
+            "id": "001464",
+            "label": "1pPSRd",
+            "prediction": "1pPSRd"
+          },
+          {
+            "id": "001630",
+            "label": "1hfOzx",
+            "prediction": "1hfOzx"
+          },
+          {
+            "id": "001648",
+            "label": "ZPb9L3",
+            "prediction": "ZPb9L3"
+          },
+          {
+            "id": "001736",
+            "label": "RHeSrF",
+            "prediction": "RHeSrF"
+          },
+          {
+            "id": "001797",
+            "label": "12HE2s",
+            "prediction": "12HE2s"
+          },
+          {
+            "id": "001805",
+            "label": "hTeMyV",
+            "prediction": "hTeMyV"
+          },
+          {
+            "id": "001841",
+            "label": "NbOVMb",
+            "prediction": "NbOVMb"
+          },
+          {
+            "id": "001876",
+            "label": "X7KVcX",
+            "prediction": "X7KVcX"
+          },
+          {
+            "id": "001886",
+            "label": "FvZfko",
+            "prediction": "FvZfko"
+          },
+          {
+            "id": "001950",
+            "label": "SSRr5N",
+            "prediction": "SSRr5N"
+          },
+          {
+            "id": "001962",
+            "label": "o5PkCm",
+            "prediction": "o5PkCm"
+          },
+          {
+            "id": "001974",
+            "label": "EwtxSv",
+            "prediction": "EwtxSv"
+          },
+          {
+            "id": "002031",
+            "label": "wd9Tfl",
+            "prediction": "wd9Tfl"
+          },
+          {
+            "id": "002060",
+            "label": "TMXQPW",
+            "prediction": "TMXQPW"
+          },
+          {
+            "id": "002153",
+            "label": "T2Pgcv",
+            "prediction": "T2Pgcv"
+          },
+          {
+            "id": "002158",
+            "label": "K66tgp",
+            "prediction": "K66tgp"
+          },
+          {
+            "id": "002172",
+            "label": "jhM6VR",
+            "prediction": "jhM6VR"
+          },
+          {
+            "id": "002186",
+            "label": "9lc1lw",
+            "prediction": "9lc1lw"
+          },
+          {
+            "id": "002405",
+            "label": "OkYrei",
+            "prediction": "OkYrei"
+          },
+          {
+            "id": "002445",
+            "label": "X5OAl1",
+            "prediction": "X5OAl1"
+          },
+          {
+            "id": "002520",
+            "label": "1aC6Sa",
+            "prediction": "1aC6Sa"
+          },
+          {
+            "id": "002554",
+            "label": "Q5S6al",
+            "prediction": "Q5S6al"
+          },
+          {
+            "id": "002656",
+            "label": "Tfah38",
+            "prediction": "Tfah38"
+          },
+          {
+            "id": "002707",
+            "label": "s9Xel1",
+            "prediction": "s9Xel1"
+          },
+          {
+            "id": "002770",
+            "label": "qEFETe",
+            "prediction": "qEFETe"
+          },
+          {
+            "id": "002787",
+            "label": "OXZ5xl",
+            "prediction": "OXZ5xl"
+          },
+          {
+            "id": "002966",
+            "label": "Gi7Hpi",
+            "prediction": "Gi7Hpi"
+          },
+          {
+            "id": "002974",
+            "label": "M2tcRJ",
+            "prediction": "M2tcRJ"
+          },
+          {
+            "id": "003060",
+            "label": "aqz9BN",
+            "prediction": "aqz9BN"
+          },
+          {
+            "id": "003064",
+            "label": "7rVieR",
+            "prediction": "7rVieR"
+          },
+          {
+            "id": "003127",
+            "label": "v72Jo2",
+            "prediction": "v72Jo2"
+          },
+          {
+            "id": "003153",
+            "label": "n4cjql",
+            "prediction": "n4cjql"
+          },
+          {
+            "id": "003269",
+            "label": "l4hXxU",
+            "prediction": "l4hXxU"
+          },
+          {
+            "id": "003272",
+            "label": "RqNHlM",
+            "prediction": "RqNHlM"
+          },
+          {
+            "id": "003459",
+            "label": "h2eaPO",
+            "prediction": "h2eaPO"
+          },
+          {
+            "id": "003467",
+            "label": "s5PDWT",
+            "prediction": "s5PDWT"
+          },
+          {
+            "id": "003510",
+            "label": "Ex7Ftg",
+            "prediction": "Ex7Ftg"
+          },
+          {
+            "id": "003562",
+            "label": "PUSLy1",
+            "prediction": "PUSLy1"
+          },
+          {
+            "id": "003589",
+            "label": "n1GKw2",
+            "prediction": "n1GKw2"
+          },
+          {
+            "id": "003699",
+            "label": "Ce9yJv",
+            "prediction": "Ce9yJv"
+          },
+          {
+            "id": "003717",
+            "label": "kLDC6j",
+            "prediction": "kLDC6j"
+          },
+          {
+            "id": "003835",
+            "label": "VTWdn2",
+            "prediction": "VTWdn2"
+          },
+          {
+            "id": "003894",
+            "label": "g8cRgH",
+            "prediction": "g8cRgH"
+          },
+          {
+            "id": "003982",
+            "label": "nolSJb",
+            "prediction": "nolSJb"
+          },
+          {
+            "id": "004003",
+            "label": "7XHekT",
+            "prediction": "7XHekT"
+          },
+          {
+            "id": "004043",
+            "label": "S61sPl",
+            "prediction": "S61sPl"
+          },
+          {
+            "id": "004101",
+            "label": "oPiWFO",
+            "prediction": "oPiWFO"
+          },
+          {
+            "id": "004159",
+            "label": "Lzwccd",
+            "prediction": "Lzwccd"
+          },
+          {
+            "id": "004175",
+            "label": "2X8xN3",
+            "prediction": "2X8xN3"
+          },
+          {
+            "id": "004212",
+            "label": "ohcNoR",
+            "prediction": "ohcNoR"
+          },
+          {
+            "id": "004240",
+            "label": "nmQ81i",
+            "prediction": "nmQ81i"
+          },
+          {
+            "id": "004323",
+            "label": "wBMz3U",
+            "prediction": "wBMz3U"
+          },
+          {
+            "id": "004335",
+            "label": "MteZv9",
+            "prediction": "MteZv9"
+          },
+          {
+            "id": "004345",
+            "label": "yVAB4h",
+            "prediction": "yVAB4h"
+          },
+          {
+            "id": "004364",
+            "label": "Nxm62s",
+            "prediction": "Nxm62s"
+          },
+          {
+            "id": "004399",
+            "label": "ZvnuZ3",
+            "prediction": "ZvnuZ3"
+          },
+          {
+            "id": "004416",
+            "label": "Zsjx9m",
+            "prediction": "Zsjx9m"
+          },
+          {
+            "id": "004418",
+            "label": "ryOegz",
+            "prediction": "ryOegz"
+          },
+          {
+            "id": "004419",
+            "label": "aebfvL",
+            "prediction": "aebfvL"
+          },
+          {
+            "id": "004504",
+            "label": "QpTgZx",
+            "prediction": "QpTgZx"
+          },
+          {
+            "id": "004533",
+            "label": "KHpLa8",
+            "prediction": "KHpLa8"
+          },
+          {
+            "id": "004538",
+            "label": "5kaOMG",
+            "prediction": "5kaOMG"
+          },
+          {
+            "id": "004648",
+            "label": "vTzOdO",
+            "prediction": "vTzOdO"
+          },
+          {
+            "id": "004781",
+            "label": "NfRMmU",
+            "prediction": "NfRMmU"
+          },
+          {
+            "id": "004789",
+            "label": "c6H6Up",
+            "prediction": "c6H6Up"
+          },
+          {
+            "id": "004862",
+            "label": "RfEo2r",
+            "prediction": "RfEo2r"
+          },
+          {
+            "id": "004886",
+            "label": "cOQs2l",
+            "prediction": "cOQs2l"
+          },
+          {
+            "id": "004952",
+            "label": "ONOBbB",
+            "prediction": "ONOBbB"
+          }
+        ],
+        "samples": 100,
+        "exact_accuracy": 1.0,
+        "character_error_rate": 0.0,
+        "case_insensitive_exact_accuracy": 1.0,
+        "case_insensitive_character_error_rate": 0.0
+      },
+      "clear_labels": {
+        "exact_correct": 97,
+        "character_errors": 0,
+        "case_insensitive_exact_correct": 97,
+        "case_insensitive_character_errors": 0,
+        "characters": 582,
+        "predictions": [
+          {
+            "id": "000005",
+            "label": "OKiSuf",
+            "prediction": "OKiSuf"
+          },
+          {
+            "id": "000027",
+            "label": "kn6pb4",
+            "prediction": "kn6pb4"
+          },
+          {
+            "id": "000059",
+            "label": "dHzWpt",
+            "prediction": "dHzWpt"
+          },
+          {
+            "id": "000095",
+            "label": "9S43OM",
+            "prediction": "9S43OM"
+          },
+          {
+            "id": "000160",
+            "label": "SloC26",
+            "prediction": "SloC26"
+          },
+          {
+            "id": "000173",
+            "label": "26DHdP",
+            "prediction": "26DHdP"
+          },
+          {
+            "id": "000258",
+            "label": "blwxM4",
+            "prediction": "blwxM4"
+          },
+          {
+            "id": "000386",
+            "label": "cDuQRZ",
+            "prediction": "cDuQRZ"
+          },
+          {
+            "id": "000475",
+            "label": "xst6fV",
+            "prediction": "xst6fV"
+          },
+          {
+            "id": "000483",
+            "label": "KgOyfA",
+            "prediction": "KgOyfA"
+          },
+          {
+            "id": "000521",
+            "label": "vUtvGC",
+            "prediction": "vUtvGC"
+          },
+          {
+            "id": "000525",
+            "label": "KMvKob",
+            "prediction": "KMvKob"
+          },
+          {
+            "id": "000553",
+            "label": "csFrAn",
+            "prediction": "csFrAn"
+          },
+          {
+            "id": "000567",
+            "label": "JwGTMQ",
+            "prediction": "JwGTMQ"
+          },
+          {
+            "id": "000582",
+            "label": "KVfDKp",
+            "prediction": "KVfDKp"
+          },
+          {
+            "id": "000745",
+            "label": "TqRUd1",
+            "prediction": "TqRUd1"
+          },
+          {
+            "id": "000872",
+            "label": "HtSqjX",
+            "prediction": "HtSqjX"
+          },
+          {
+            "id": "000899",
+            "label": "Sbztef",
+            "prediction": "Sbztef"
+          },
+          {
+            "id": "000914",
+            "label": "sTjuoi",
+            "prediction": "sTjuoi"
+          },
+          {
+            "id": "000917",
+            "label": "xBo2Ul",
+            "prediction": "xBo2Ul"
+          },
+          {
+            "id": "000939",
+            "label": "XRqOxm",
+            "prediction": "XRqOxm"
+          },
+          {
+            "id": "000992",
+            "label": "65oSpE",
+            "prediction": "65oSpE"
+          },
+          {
+            "id": "001031",
+            "label": "BNkStQ",
+            "prediction": "BNkStQ"
+          },
+          {
+            "id": "001052",
+            "label": "P4DnvO",
+            "prediction": "P4DnvO"
+          },
+          {
+            "id": "001134",
+            "label": "15TE1m",
+            "prediction": "15TE1m"
+          },
+          {
+            "id": "001253",
+            "label": "zfzu3L",
+            "prediction": "zfzu3L"
+          },
+          {
+            "id": "001296",
+            "label": "2nuntD",
+            "prediction": "2nuntD"
+          },
+          {
+            "id": "001311",
+            "label": "rlAvvK",
+            "prediction": "rlAvvK"
+          },
+          {
+            "id": "001324",
+            "label": "SUYfxL",
+            "prediction": "SUYfxL"
+          },
+          {
+            "id": "001353",
+            "label": "7ZbpaF",
+            "prediction": "7ZbpaF"
+          },
+          {
+            "id": "001464",
+            "label": "1pPSRd",
+            "prediction": "1pPSRd"
+          },
+          {
+            "id": "001630",
+            "label": "1hfOzx",
+            "prediction": "1hfOzx"
+          },
+          {
+            "id": "001648",
+            "label": "ZPb9L3",
+            "prediction": "ZPb9L3"
+          },
+          {
+            "id": "001736",
+            "label": "RHeSrF",
+            "prediction": "RHeSrF"
+          },
+          {
+            "id": "001797",
+            "label": "12HE2s",
+            "prediction": "12HE2s"
+          },
+          {
+            "id": "001805",
+            "label": "hTeMyV",
+            "prediction": "hTeMyV"
+          },
+          {
+            "id": "001841",
+            "label": "NbOVMb",
+            "prediction": "NbOVMb"
+          },
+          {
+            "id": "001886",
+            "label": "FvZfko",
+            "prediction": "FvZfko"
+          },
+          {
+            "id": "001950",
+            "label": "SSRr5N",
+            "prediction": "SSRr5N"
+          },
+          {
+            "id": "001962",
+            "label": "o5PkCm",
+            "prediction": "o5PkCm"
+          },
+          {
+            "id": "001974",
+            "label": "EwtxSv",
+            "prediction": "EwtxSv"
+          },
+          {
+            "id": "002031",
+            "label": "wd9Tfl",
+            "prediction": "wd9Tfl"
+          },
+          {
+            "id": "002060",
+            "label": "TMXQPW",
+            "prediction": "TMXQPW"
+          },
+          {
+            "id": "002153",
+            "label": "T2Pgcv",
+            "prediction": "T2Pgcv"
+          },
+          {
+            "id": "002158",
+            "label": "K66tgp",
+            "prediction": "K66tgp"
+          },
+          {
+            "id": "002172",
+            "label": "jhM6VR",
+            "prediction": "jhM6VR"
+          },
+          {
+            "id": "002186",
+            "label": "9lc1lw",
+            "prediction": "9lc1lw"
+          },
+          {
+            "id": "002405",
+            "label": "OkYrei",
+            "prediction": "OkYrei"
+          },
+          {
+            "id": "002445",
+            "label": "X5OAl1",
+            "prediction": "X5OAl1"
+          },
+          {
+            "id": "002520",
+            "label": "1aC6Sa",
+            "prediction": "1aC6Sa"
+          },
+          {
+            "id": "002554",
+            "label": "Q5S6al",
+            "prediction": "Q5S6al"
+          },
+          {
+            "id": "002656",
+            "label": "Tfah38",
+            "prediction": "Tfah38"
+          },
+          {
+            "id": "002707",
+            "label": "s9Xel1",
+            "prediction": "s9Xel1"
+          },
+          {
+            "id": "002770",
+            "label": "qEFETe",
+            "prediction": "qEFETe"
+          },
+          {
+            "id": "002787",
+            "label": "OXZ5xl",
+            "prediction": "OXZ5xl"
+          },
+          {
+            "id": "002966",
+            "label": "Gi7Hpi",
+            "prediction": "Gi7Hpi"
+          },
+          {
+            "id": "002974",
+            "label": "M2tcRJ",
+            "prediction": "M2tcRJ"
+          },
+          {
+            "id": "003060",
+            "label": "aqz9BN",
+            "prediction": "aqz9BN"
+          },
+          {
+            "id": "003064",
+            "label": "7rVieR",
+            "prediction": "7rVieR"
+          },
+          {
+            "id": "003127",
+            "label": "v72Jo2",
+            "prediction": "v72Jo2"
+          },
+          {
+            "id": "003153",
+            "label": "n4cjql",
+            "prediction": "n4cjql"
+          },
+          {
+            "id": "003269",
+            "label": "l4hXxU",
+            "prediction": "l4hXxU"
+          },
+          {
+            "id": "003272",
+            "label": "RqNHlM",
+            "prediction": "RqNHlM"
+          },
+          {
+            "id": "003459",
+            "label": "h2eaPO",
+            "prediction": "h2eaPO"
+          },
+          {
+            "id": "003467",
+            "label": "s5PDWT",
+            "prediction": "s5PDWT"
+          },
+          {
+            "id": "003510",
+            "label": "Ex7Ftg",
+            "prediction": "Ex7Ftg"
+          },
+          {
+            "id": "003562",
+            "label": "PUSLy1",
+            "prediction": "PUSLy1"
+          },
+          {
+            "id": "003589",
+            "label": "n1GKw2",
+            "prediction": "n1GKw2"
+          },
+          {
+            "id": "003699",
+            "label": "Ce9yJv",
+            "prediction": "Ce9yJv"
+          },
+          {
+            "id": "003717",
+            "label": "kLDC6j",
+            "prediction": "kLDC6j"
+          },
+          {
+            "id": "003835",
+            "label": "VTWdn2",
+            "prediction": "VTWdn2"
+          },
+          {
+            "id": "003894",
+            "label": "g8cRgH",
+            "prediction": "g8cRgH"
+          },
+          {
+            "id": "003982",
+            "label": "nolSJb",
+            "prediction": "nolSJb"
+          },
+          {
+            "id": "004003",
+            "label": "7XHekT",
+            "prediction": "7XHekT"
+          },
+          {
+            "id": "004043",
+            "label": "S61sPl",
+            "prediction": "S61sPl"
+          },
+          {
+            "id": "004101",
+            "label": "oPiWFO",
+            "prediction": "oPiWFO"
+          },
+          {
+            "id": "004159",
+            "label": "Lzwccd",
+            "prediction": "Lzwccd"
+          },
+          {
+            "id": "004175",
+            "label": "2X8xN3",
+            "prediction": "2X8xN3"
+          },
+          {
+            "id": "004212",
+            "label": "ohcNoR",
+            "prediction": "ohcNoR"
+          },
+          {
+            "id": "004240",
+            "label": "nmQ81i",
+            "prediction": "nmQ81i"
+          },
+          {
+            "id": "004323",
+            "label": "wBMz3U",
+            "prediction": "wBMz3U"
+          },
+          {
+            "id": "004335",
+            "label": "MteZv9",
+            "prediction": "MteZv9"
+          },
+          {
+            "id": "004345",
+            "label": "yVAB4h",
+            "prediction": "yVAB4h"
+          },
+          {
+            "id": "004364",
+            "label": "Nxm62s",
+            "prediction": "Nxm62s"
+          },
+          {
+            "id": "004399",
+            "label": "ZvnuZ3",
+            "prediction": "ZvnuZ3"
+          },
+          {
+            "id": "004416",
+            "label": "Zsjx9m",
+            "prediction": "Zsjx9m"
+          },
+          {
+            "id": "004418",
+            "label": "ryOegz",
+            "prediction": "ryOegz"
+          },
+          {
+            "id": "004419",
+            "label": "aebfvL",
+            "prediction": "aebfvL"
+          },
+          {
+            "id": "004504",
+            "label": "QpTgZx",
+            "prediction": "QpTgZx"
+          },
+          {
+            "id": "004533",
+            "label": "KHpLa8",
+            "prediction": "KHpLa8"
+          },
+          {
+            "id": "004538",
+            "label": "5kaOMG",
+            "prediction": "5kaOMG"
+          },
+          {
+            "id": "004648",
+            "label": "vTzOdO",
+            "prediction": "vTzOdO"
+          },
+          {
+            "id": "004781",
+            "label": "NfRMmU",
+            "prediction": "NfRMmU"
+          },
+          {
+            "id": "004789",
+            "label": "c6H6Up",
+            "prediction": "c6H6Up"
+          },
+          {
+            "id": "004862",
+            "label": "RfEo2r",
+            "prediction": "RfEo2r"
+          },
+          {
+            "id": "004886",
+            "label": "cOQs2l",
+            "prediction": "cOQs2l"
+          },
+          {
+            "id": "004952",
+            "label": "ONOBbB",
+            "prediction": "ONOBbB"
+          }
+        ],
+        "samples": 97,
+        "exact_accuracy": 1.0,
+        "character_error_rate": 0.0,
+        "case_insensitive_exact_accuracy": 1.0,
+        "case_insensitive_character_error_rate": 0.0
+      }
+    },
+    "test": {
+      "all_labels": {
+        "exact_correct": 100,
+        "character_errors": 0,
+        "case_insensitive_exact_correct": 100,
+        "case_insensitive_character_errors": 0,
+        "characters": 600,
+        "predictions": [
+          {
+            "id": "000054",
+            "label": "uCs5fN",
+            "prediction": "uCs5fN"
+          },
+          {
+            "id": "000205",
+            "label": "qf36Bg",
+            "prediction": "qf36Bg"
+          },
+          {
+            "id": "000218",
+            "label": "WE8BVP",
+            "prediction": "WE8BVP"
+          },
+          {
+            "id": "000245",
+            "label": "V5J4Qu",
+            "prediction": "V5J4Qu"
+          },
+          {
+            "id": "000261",
+            "label": "8RUgSo",
+            "prediction": "8RUgSo"
+          },
+          {
+            "id": "000263",
+            "label": "mcQHzp",
+            "prediction": "mcQHzp"
+          },
+          {
+            "id": "000356",
+            "label": "WPhGHs",
+            "prediction": "WPhGHs"
+          },
+          {
+            "id": "000376",
+            "label": "VQPFe6",
+            "prediction": "VQPFe6"
+          },
+          {
+            "id": "000459",
+            "label": "ldbXnG",
+            "prediction": "ldbXnG"
+          },
+          {
+            "id": "000543",
+            "label": "m2Bjlp",
+            "prediction": "m2Bjlp"
+          },
+          {
+            "id": "000570",
+            "label": "BGAL42",
+            "prediction": "BGAL42"
+          },
+          {
+            "id": "000585",
+            "label": "O5hhlx",
+            "prediction": "O5hhlx"
+          },
+          {
+            "id": "000646",
+            "label": "mHcCGO",
+            "prediction": "mHcCGO"
+          },
+          {
+            "id": "000654",
+            "label": "EfyRU2",
+            "prediction": "EfyRU2"
+          },
+          {
+            "id": "000713",
+            "label": "jNenwh",
+            "prediction": "jNenwh"
+          },
+          {
+            "id": "000760",
+            "label": "VelLBm",
+            "prediction": "VelLBm"
+          },
+          {
+            "id": "000768",
+            "label": "pBwGwM",
+            "prediction": "pBwGwM"
+          },
+          {
+            "id": "000793",
+            "label": "6de4MJ",
+            "prediction": "6de4MJ"
+          },
+          {
+            "id": "000828",
+            "label": "cO5VFM",
+            "prediction": "cO5VFM"
+          },
+          {
+            "id": "000838",
+            "label": "x25tLV",
+            "prediction": "x25tLV"
+          },
+          {
+            "id": "000840",
+            "label": "jApqYr",
+            "prediction": "jApqYr"
+          },
+          {
+            "id": "000913",
+            "label": "rOLX9H",
+            "prediction": "rOLX9H"
+          },
+          {
+            "id": "001023",
+            "label": "v9N9nE",
+            "prediction": "v9N9nE"
+          },
+          {
+            "id": "001144",
+            "label": "jfNEoQ",
+            "prediction": "jfNEoQ"
+          },
+          {
+            "id": "001171",
+            "label": "waWxzK",
+            "prediction": "waWxzK"
+          },
+          {
+            "id": "001274",
+            "label": "uNgh3l",
+            "prediction": "uNgh3l"
+          },
+          {
+            "id": "001308",
+            "label": "OclAm7",
+            "prediction": "OclAm7"
+          },
+          {
+            "id": "001333",
+            "label": "tRFWuv",
+            "prediction": "tRFWuv"
+          },
+          {
+            "id": "001339",
+            "label": "FobKZg",
+            "prediction": "FobKZg"
+          },
+          {
+            "id": "001402",
+            "label": "8ycsGk",
+            "prediction": "8ycsGk"
+          },
+          {
+            "id": "001576",
+            "label": "goL3Mr",
+            "prediction": "goL3Mr"
+          },
+          {
+            "id": "001629",
+            "label": "x66RVf",
+            "prediction": "x66RVf"
+          },
+          {
+            "id": "001717",
+            "label": "HUOJib",
+            "prediction": "HUOJib"
+          },
+          {
+            "id": "001729",
+            "label": "Ebf8O5",
+            "prediction": "Ebf8O5"
+          },
+          {
+            "id": "001742",
+            "label": "OoijJ5",
+            "prediction": "OoijJ5"
+          },
+          {
+            "id": "001764",
+            "label": "t59HjN",
+            "prediction": "t59HjN"
+          },
+          {
+            "id": "001792",
+            "label": "uNgxvY",
+            "prediction": "uNgxvY"
+          },
+          {
+            "id": "001800",
+            "label": "GKz32Q",
+            "prediction": "GKz32Q"
+          },
+          {
+            "id": "001806",
+            "label": "PHOGZh",
+            "prediction": "PHOGZh"
+          },
+          {
+            "id": "001829",
+            "label": "yTmW6m",
+            "prediction": "yTmW6m"
+          },
+          {
+            "id": "001867",
+            "label": "lQsdlb",
+            "prediction": "lQsdlb"
+          },
+          {
+            "id": "001877",
+            "label": "UinNR5",
+            "prediction": "UinNR5"
+          },
+          {
+            "id": "001906",
+            "label": "8zWhb4",
+            "prediction": "8zWhb4"
+          },
+          {
+            "id": "001908",
+            "label": "wtVmJE",
+            "prediction": "wtVmJE"
+          },
+          {
+            "id": "002006",
+            "label": "ecYtPL",
+            "prediction": "ecYtPL"
+          },
+          {
+            "id": "002007",
+            "label": "FTOVav",
+            "prediction": "FTOVav"
+          },
+          {
+            "id": "002021",
+            "label": "blRQGU",
+            "prediction": "blRQGU"
+          },
+          {
+            "id": "002167",
+            "label": "UGkpL2",
+            "prediction": "UGkpL2"
+          },
+          {
+            "id": "002170",
+            "label": "lARXhK",
+            "prediction": "lARXhK"
+          },
+          {
+            "id": "002188",
+            "label": "JdEQ1O",
+            "prediction": "JdEQ1O"
+          },
+          {
+            "id": "002194",
+            "label": "Nx2Nj4",
+            "prediction": "Nx2Nj4"
+          },
+          {
+            "id": "002212",
+            "label": "kYEnuh",
+            "prediction": "kYEnuh"
+          },
+          {
+            "id": "002254",
+            "label": "fQSMhy",
+            "prediction": "fQSMhy"
+          },
+          {
+            "id": "002277",
+            "label": "NgtfZY",
+            "prediction": "NgtfZY"
+          },
+          {
+            "id": "002278",
+            "label": "9plTa8",
+            "prediction": "9plTa8"
+          },
+          {
+            "id": "002279",
+            "label": "nUHOYH",
+            "prediction": "nUHOYH"
+          },
+          {
+            "id": "002371",
+            "label": "bFo5cz",
+            "prediction": "bFo5cz"
+          },
+          {
+            "id": "002402",
+            "label": "DQBuWC",
+            "prediction": "DQBuWC"
+          },
+          {
+            "id": "002578",
+            "label": "6cC7mO",
+            "prediction": "6cC7mO"
+          },
+          {
+            "id": "002585",
+            "label": "ijMiVx",
+            "prediction": "ijMiVx"
+          },
+          {
+            "id": "002657",
+            "label": "JOcChT",
+            "prediction": "JOcChT"
+          },
+          {
+            "id": "002758",
+            "label": "D5b5pb",
+            "prediction": "D5b5pb"
+          },
+          {
+            "id": "002788",
+            "label": "JDM7Oo",
+            "prediction": "JDM7Oo"
+          },
+          {
+            "id": "002818",
+            "label": "SGbm7W",
+            "prediction": "SGbm7W"
+          },
+          {
+            "id": "002911",
+            "label": "xal29F",
+            "prediction": "xal29F"
+          },
+          {
+            "id": "002941",
+            "label": "S2ykKy",
+            "prediction": "S2ykKy"
+          },
+          {
+            "id": "002963",
+            "label": "Rep2mz",
+            "prediction": "Rep2mz"
+          },
+          {
+            "id": "002989",
+            "label": "Uag3Fa",
+            "prediction": "Uag3Fa"
+          },
+          {
+            "id": "003033",
+            "label": "ySgWtk",
+            "prediction": "ySgWtk"
+          },
+          {
+            "id": "003101",
+            "label": "7QV1L8",
+            "prediction": "7QV1L8"
+          },
+          {
+            "id": "003109",
+            "label": "pJEhMC",
+            "prediction": "pJEhMC"
+          },
+          {
+            "id": "003113",
+            "label": "Ny6YMs",
+            "prediction": "Ny6YMs"
+          },
+          {
+            "id": "003114",
+            "label": "vdikQj",
+            "prediction": "vdikQj"
+          },
+          {
+            "id": "003242",
+            "label": "FchDaw",
+            "prediction": "FchDaw"
+          },
+          {
+            "id": "003287",
+            "label": "8rdvhR",
+            "prediction": "8rdvhR"
+          },
+          {
+            "id": "003437",
+            "label": "24AwVa",
+            "prediction": "24AwVa"
+          },
+          {
+            "id": "003457",
+            "label": "ihoA8m",
+            "prediction": "ihoA8m"
+          },
+          {
+            "id": "003463",
+            "label": "VtlgNC",
+            "prediction": "VtlgNC"
+          },
+          {
+            "id": "003680",
+            "label": "PN78Bz",
+            "prediction": "PN78Bz"
+          },
+          {
+            "id": "003715",
+            "label": "qdYj9g",
+            "prediction": "qdYj9g"
+          },
+          {
+            "id": "003759",
+            "label": "BjdlEq",
+            "prediction": "BjdlEq"
+          },
+          {
+            "id": "003764",
+            "label": "3PAOAY",
+            "prediction": "3PAOAY"
+          },
+          {
+            "id": "003787",
+            "label": "CQg4Nn",
+            "prediction": "CQg4Nn"
+          },
+          {
+            "id": "004090",
+            "label": "j71qrp",
+            "prediction": "j71qrp"
+          },
+          {
+            "id": "004140",
+            "label": "HlwmJb",
+            "prediction": "HlwmJb"
+          },
+          {
+            "id": "004376",
+            "label": "mKlcaT",
+            "prediction": "mKlcaT"
+          },
+          {
+            "id": "004393",
+            "label": "yP78VJ",
+            "prediction": "yP78VJ"
+          },
+          {
+            "id": "004465",
+            "label": "sUg7Xl",
+            "prediction": "sUg7Xl"
+          },
+          {
+            "id": "004468",
+            "label": "DHnWNO",
+            "prediction": "DHnWNO"
+          },
+          {
+            "id": "004523",
+            "label": "UgocUf",
+            "prediction": "UgocUf"
+          },
+          {
+            "id": "004563",
+            "label": "OdGzrC",
+            "prediction": "OdGzrC"
+          },
+          {
+            "id": "004598",
+            "label": "z7GsX3",
+            "prediction": "z7GsX3"
+          },
+          {
+            "id": "004599",
+            "label": "E26usE",
+            "prediction": "E26usE"
+          },
+          {
+            "id": "004647",
+            "label": "TkVd92",
+            "prediction": "TkVd92"
+          },
+          {
+            "id": "004730",
+            "label": "7ElUc9",
+            "prediction": "7ElUc9"
+          },
+          {
+            "id": "004828",
+            "label": "t6Pl15",
+            "prediction": "t6Pl15"
+          },
+          {
+            "id": "004838",
+            "label": "5aVvu2",
+            "prediction": "5aVvu2"
+          },
+          {
+            "id": "004932",
+            "label": "ky3CPt",
+            "prediction": "ky3CPt"
+          },
+          {
+            "id": "004946",
+            "label": "8TfJgK",
+            "prediction": "8TfJgK"
+          },
+          {
+            "id": "004995",
+            "label": "jJdFjl",
+            "prediction": "jJdFjl"
+          }
+        ],
+        "samples": 100,
+        "exact_accuracy": 1.0,
+        "character_error_rate": 0.0,
+        "case_insensitive_exact_accuracy": 1.0,
+        "case_insensitive_character_error_rate": 0.0
+      },
+      "clear_labels": {
+        "exact_correct": 97,
+        "character_errors": 0,
+        "case_insensitive_exact_correct": 97,
+        "case_insensitive_character_errors": 0,
+        "characters": 582,
+        "predictions": [
+          {
+            "id": "000054",
+            "label": "uCs5fN",
+            "prediction": "uCs5fN"
+          },
+          {
+            "id": "000205",
+            "label": "qf36Bg",
+            "prediction": "qf36Bg"
+          },
+          {
+            "id": "000218",
+            "label": "WE8BVP",
+            "prediction": "WE8BVP"
+          },
+          {
+            "id": "000245",
+            "label": "V5J4Qu",
+            "prediction": "V5J4Qu"
+          },
+          {
+            "id": "000356",
+            "label": "WPhGHs",
+            "prediction": "WPhGHs"
+          },
+          {
+            "id": "000376",
+            "label": "VQPFe6",
+            "prediction": "VQPFe6"
+          },
+          {
+            "id": "000459",
+            "label": "ldbXnG",
+            "prediction": "ldbXnG"
+          },
+          {
+            "id": "000543",
+            "label": "m2Bjlp",
+            "prediction": "m2Bjlp"
+          },
+          {
+            "id": "000570",
+            "label": "BGAL42",
+            "prediction": "BGAL42"
+          },
+          {
+            "id": "000585",
+            "label": "O5hhlx",
+            "prediction": "O5hhlx"
+          },
+          {
+            "id": "000646",
+            "label": "mHcCGO",
+            "prediction": "mHcCGO"
+          },
+          {
+            "id": "000654",
+            "label": "EfyRU2",
+            "prediction": "EfyRU2"
+          },
+          {
+            "id": "000713",
+            "label": "jNenwh",
+            "prediction": "jNenwh"
+          },
+          {
+            "id": "000760",
+            "label": "VelLBm",
+            "prediction": "VelLBm"
+          },
+          {
+            "id": "000768",
+            "label": "pBwGwM",
+            "prediction": "pBwGwM"
+          },
+          {
+            "id": "000793",
+            "label": "6de4MJ",
+            "prediction": "6de4MJ"
+          },
+          {
+            "id": "000828",
+            "label": "cO5VFM",
+            "prediction": "cO5VFM"
+          },
+          {
+            "id": "000838",
+            "label": "x25tLV",
+            "prediction": "x25tLV"
+          },
+          {
+            "id": "000840",
+            "label": "jApqYr",
+            "prediction": "jApqYr"
+          },
+          {
+            "id": "000913",
+            "label": "rOLX9H",
+            "prediction": "rOLX9H"
+          },
+          {
+            "id": "001023",
+            "label": "v9N9nE",
+            "prediction": "v9N9nE"
+          },
+          {
+            "id": "001144",
+            "label": "jfNEoQ",
+            "prediction": "jfNEoQ"
+          },
+          {
+            "id": "001171",
+            "label": "waWxzK",
+            "prediction": "waWxzK"
+          },
+          {
+            "id": "001274",
+            "label": "uNgh3l",
+            "prediction": "uNgh3l"
+          },
+          {
+            "id": "001308",
+            "label": "OclAm7",
+            "prediction": "OclAm7"
+          },
+          {
+            "id": "001333",
+            "label": "tRFWuv",
+            "prediction": "tRFWuv"
+          },
+          {
+            "id": "001339",
+            "label": "FobKZg",
+            "prediction": "FobKZg"
+          },
+          {
+            "id": "001402",
+            "label": "8ycsGk",
+            "prediction": "8ycsGk"
+          },
+          {
+            "id": "001576",
+            "label": "goL3Mr",
+            "prediction": "goL3Mr"
+          },
+          {
+            "id": "001629",
+            "label": "x66RVf",
+            "prediction": "x66RVf"
+          },
+          {
+            "id": "001717",
+            "label": "HUOJib",
+            "prediction": "HUOJib"
+          },
+          {
+            "id": "001729",
+            "label": "Ebf8O5",
+            "prediction": "Ebf8O5"
+          },
+          {
+            "id": "001742",
+            "label": "OoijJ5",
+            "prediction": "OoijJ5"
+          },
+          {
+            "id": "001764",
+            "label": "t59HjN",
+            "prediction": "t59HjN"
+          },
+          {
+            "id": "001792",
+            "label": "uNgxvY",
+            "prediction": "uNgxvY"
+          },
+          {
+            "id": "001800",
+            "label": "GKz32Q",
+            "prediction": "GKz32Q"
+          },
+          {
+            "id": "001806",
+            "label": "PHOGZh",
+            "prediction": "PHOGZh"
+          },
+          {
+            "id": "001829",
+            "label": "yTmW6m",
+            "prediction": "yTmW6m"
+          },
+          {
+            "id": "001867",
+            "label": "lQsdlb",
+            "prediction": "lQsdlb"
+          },
+          {
+            "id": "001877",
+            "label": "UinNR5",
+            "prediction": "UinNR5"
+          },
+          {
+            "id": "001906",
+            "label": "8zWhb4",
+            "prediction": "8zWhb4"
+          },
+          {
+            "id": "002006",
+            "label": "ecYtPL",
+            "prediction": "ecYtPL"
+          },
+          {
+            "id": "002007",
+            "label": "FTOVav",
+            "prediction": "FTOVav"
+          },
+          {
+            "id": "002021",
+            "label": "blRQGU",
+            "prediction": "blRQGU"
+          },
+          {
+            "id": "002167",
+            "label": "UGkpL2",
+            "prediction": "UGkpL2"
+          },
+          {
+            "id": "002170",
+            "label": "lARXhK",
+            "prediction": "lARXhK"
+          },
+          {
+            "id": "002188",
+            "label": "JdEQ1O",
+            "prediction": "JdEQ1O"
+          },
+          {
+            "id": "002194",
+            "label": "Nx2Nj4",
+            "prediction": "Nx2Nj4"
+          },
+          {
+            "id": "002212",
+            "label": "kYEnuh",
+            "prediction": "kYEnuh"
+          },
+          {
+            "id": "002254",
+            "label": "fQSMhy",
+            "prediction": "fQSMhy"
+          },
+          {
+            "id": "002277",
+            "label": "NgtfZY",
+            "prediction": "NgtfZY"
+          },
+          {
+            "id": "002278",
+            "label": "9plTa8",
+            "prediction": "9plTa8"
+          },
+          {
+            "id": "002279",
+            "label": "nUHOYH",
+            "prediction": "nUHOYH"
+          },
+          {
+            "id": "002371",
+            "label": "bFo5cz",
+            "prediction": "bFo5cz"
+          },
+          {
+            "id": "002402",
+            "label": "DQBuWC",
+            "prediction": "DQBuWC"
+          },
+          {
+            "id": "002578",
+            "label": "6cC7mO",
+            "prediction": "6cC7mO"
+          },
+          {
+            "id": "002585",
+            "label": "ijMiVx",
+            "prediction": "ijMiVx"
+          },
+          {
+            "id": "002657",
+            "label": "JOcChT",
+            "prediction": "JOcChT"
+          },
+          {
+            "id": "002758",
+            "label": "D5b5pb",
+            "prediction": "D5b5pb"
+          },
+          {
+            "id": "002788",
+            "label": "JDM7Oo",
+            "prediction": "JDM7Oo"
+          },
+          {
+            "id": "002818",
+            "label": "SGbm7W",
+            "prediction": "SGbm7W"
+          },
+          {
+            "id": "002911",
+            "label": "xal29F",
+            "prediction": "xal29F"
+          },
+          {
+            "id": "002941",
+            "label": "S2ykKy",
+            "prediction": "S2ykKy"
+          },
+          {
+            "id": "002963",
+            "label": "Rep2mz",
+            "prediction": "Rep2mz"
+          },
+          {
+            "id": "002989",
+            "label": "Uag3Fa",
+            "prediction": "Uag3Fa"
+          },
+          {
+            "id": "003033",
+            "label": "ySgWtk",
+            "prediction": "ySgWtk"
+          },
+          {
+            "id": "003101",
+            "label": "7QV1L8",
+            "prediction": "7QV1L8"
+          },
+          {
+            "id": "003109",
+            "label": "pJEhMC",
+            "prediction": "pJEhMC"
+          },
+          {
+            "id": "003113",
+            "label": "Ny6YMs",
+            "prediction": "Ny6YMs"
+          },
+          {
+            "id": "003114",
+            "label": "vdikQj",
+            "prediction": "vdikQj"
+          },
+          {
+            "id": "003242",
+            "label": "FchDaw",
+            "prediction": "FchDaw"
+          },
+          {
+            "id": "003287",
+            "label": "8rdvhR",
+            "prediction": "8rdvhR"
+          },
+          {
+            "id": "003437",
+            "label": "24AwVa",
+            "prediction": "24AwVa"
+          },
+          {
+            "id": "003457",
+            "label": "ihoA8m",
+            "prediction": "ihoA8m"
+          },
+          {
+            "id": "003463",
+            "label": "VtlgNC",
+            "prediction": "VtlgNC"
+          },
+          {
+            "id": "003680",
+            "label": "PN78Bz",
+            "prediction": "PN78Bz"
+          },
+          {
+            "id": "003715",
+            "label": "qdYj9g",
+            "prediction": "qdYj9g"
+          },
+          {
+            "id": "003759",
+            "label": "BjdlEq",
+            "prediction": "BjdlEq"
+          },
+          {
+            "id": "003764",
+            "label": "3PAOAY",
+            "prediction": "3PAOAY"
+          },
+          {
+            "id": "003787",
+            "label": "CQg4Nn",
+            "prediction": "CQg4Nn"
+          },
+          {
+            "id": "004090",
+            "label": "j71qrp",
+            "prediction": "j71qrp"
+          },
+          {
+            "id": "004140",
+            "label": "HlwmJb",
+            "prediction": "HlwmJb"
+          },
+          {
+            "id": "004376",
+            "label": "mKlcaT",
+            "prediction": "mKlcaT"
+          },
+          {
+            "id": "004393",
+            "label": "yP78VJ",
+            "prediction": "yP78VJ"
+          },
+          {
+            "id": "004465",
+            "label": "sUg7Xl",
+            "prediction": "sUg7Xl"
+          },
+          {
+            "id": "004468",
+            "label": "DHnWNO",
+            "prediction": "DHnWNO"
+          },
+          {
+            "id": "004523",
+            "label": "UgocUf",
+            "prediction": "UgocUf"
+          },
+          {
+            "id": "004563",
+            "label": "OdGzrC",
+            "prediction": "OdGzrC"
+          },
+          {
+            "id": "004598",
+            "label": "z7GsX3",
+            "prediction": "z7GsX3"
+          },
+          {
+            "id": "004599",
+            "label": "E26usE",
+            "prediction": "E26usE"
+          },
+          {
+            "id": "004647",
+            "label": "TkVd92",
+            "prediction": "TkVd92"
+          },
+          {
+            "id": "004730",
+            "label": "7ElUc9",
+            "prediction": "7ElUc9"
+          },
+          {
+            "id": "004828",
+            "label": "t6Pl15",
+            "prediction": "t6Pl15"
+          },
+          {
+            "id": "004838",
+            "label": "5aVvu2",
+            "prediction": "5aVvu2"
+          },
+          {
+            "id": "004932",
+            "label": "ky3CPt",
+            "prediction": "ky3CPt"
+          },
+          {
+            "id": "004946",
+            "label": "8TfJgK",
+            "prediction": "8TfJgK"
+          },
+          {
+            "id": "004995",
+            "label": "jJdFjl",
+            "prediction": "jJdFjl"
+          }
+        ],
+        "samples": 97,
+        "exact_accuracy": 1.0,
+        "character_error_rate": 0.0,
+        "case_insensitive_exact_accuracy": 1.0,
+        "case_insensitive_character_error_rate": 0.0
+      }
+    }
+  },
+  "training_protocol": {
+    "train_samples_used": 4800,
+    "training_views_per_sample": 4,
+    "uncertain_label_loss_weight": 1.0,
+    "validation_selection": "clear-label exact-case CER, tie-broken by clear-label exact accuracy",
+    "test_split_access": "one evaluation after restoring best validation checkpoint"
+  },
+  "provenance": {
+    "manifest_path": "/Users/dev2k6/Workspace/tooling/ai/captcha-mku/data/captcha5000/manifest.json",
+    "manifest_sha256": "1b7f9c79b08e0d8b7ba9c8296e857a382dcba526348a9f422650ccd267024f81",
+    "encoder_path": "/Users/dev2k6/Workspace/tooling/ai/captcha-mku/.venv/lib/python3.13/site-packages/ddddocr/common_old.onnx",
+    "encoder_sha256": "b8f2ad9cbc1f2e3922a6cb9459e30824e7e2467f3fb4fd61420640e34ea0bf68",
+    "epochs": 80,
+    "patience": 35,
+    "batch_size": 64,
+    "augmentations_per_train_sample": 4,
+    "uncertain_label_weight": 1.0,
+    "pretrained_head_learning_rate": 3e-05,
+    "residual_head_learning_rate": 0.001,
+    "weight_decay": 0.001,
+    "seed": 42,
+    "requested_device": "auto",
+    "train_all": true,
+    "skip_onnx": false,
+    "charset": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    "preprocessing": {
+      "decode_mode": "RGB",
+      "resize_order": "RGB resize with Pillow LANCZOS, then convert to L",
+      "height": 64,
+      "width": "max(1, int(original_width * 64 / original_height))",
+      "normalization": "uint8 grayscale / 255.0"
+    }
+  }
+}

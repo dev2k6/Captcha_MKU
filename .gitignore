@@ -17,8 +17,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Captured datasets, local checkpoints and generated evaluation reports
+# Captured datasets and local temporary files
 data/
-models/
-reports/
 .coverage
