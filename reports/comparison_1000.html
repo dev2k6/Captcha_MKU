@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Báo cáo Benchmark 1000 Ảnh Test Mới - MKU CAPTCHA</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #f1f5f9; padding: 24px; }
+.card { background: #1e293b; border-radius: 10px; padding: 20px; margin-bottom: 24px; border: 1px solid #334155; }
+h1, h2 { color: #38bdf8; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 16px 0; }
+.metric { background: #0f172a; padding: 14px; border-radius: 8px; border: 1px solid #334155; }
+.metric .val { font-size: 26px; font-weight: bold; color: #10b981; }
+.metric .val.bad { color: #ef4444; }
+.metric .lbl { font-size: 13px; color: #94a3b8; }
+table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+th, td { padding: 10px 12px; border-bottom: 1px solid #334155; text-align: left; }
+th { background: #0f172a; color: #38bdf8; }
+.match-ok { color: #10b981; font-weight: bold; }
+.match-bad { color: #ef4444; font-weight: bold; }
+img.thumb { height: 36px; border-radius: 4px; vertical-align: middle; background: #fff; }
+</style>
+</head>
+<body>
+<h1>Báo cáo Đánh giá Benchmark 1000 Ảnh Test Mới</h1>
+<div class="card">
+  <h2>Tóm tắt Hiệu năng (1,000 Ảnh Mới Độc Lập)</h2>
+  <div class="grid">
+    <div class="metric">
+      <div class="lbl">Custom ONNX Exact Match</div>
+      <div class="val">1000/1000 (100.0%)</div>
+    </div>
+    <div class="metric">
+      <div class="lbl">ddddocr Exact Match</div>
+      <div class="val bad">189/1000 (18.9%)</div>
+    </div>
+    <div class="metric">
+      <div class="lbl">Tốc độ Custom ONNX</div>
+      <div class="val">5.07 ms (197.4 FPS)</div>
+    </div>
+    <div class="metric">
+      <div class="lbl">Tốc độ ddddocr</div>
+      <div class="val bad">37.33 ms (26.8 FPS)</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

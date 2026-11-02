@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-11-02 13:01:34",
+  "total_samples": 500,
+  "custom_model": {
+    "name": "MKU Custom CRNN ONNX (Fine-tuned)",
+    "model_path": "/Users/dev2k6/Workspace/tooling/ai/captcha-mku/models/captcha/model.onnx",
+    "exact_match": 500,
+    "exact_match_pct": 100.0,
+    "case_insensitive_match": 500,
+    "case_insensitive_pct": 100.0,
+    "valid_length": 500,
+    "valid_length_pct": 100.0,
+    "mean_confidence_pct": 99.84,
+    "latency": {
+      "mean_ms": 7.36,
+      "min_ms": 3.86,
+      "max_ms": 46.69,
+      "p50_ms": 6.69,
+      "p90_ms": 10.87,
+      "p95_ms": 12.09,
+      "p99_ms": 15.09,
+      "fps": 135.9
+    }
+  },
+  "baseline_ddddocr": {
+    "name": "ddddocr (Pretrained Original)",
+    "exact_match": 88,
+    "exact_match_pct": 17.6,
+    "case_insensitive_match": 221,
+    "case_insensitive_pct": 44.2,
+    "valid_length": 444,
+    "valid_length_pct": 88.8,
+    "latency": {
+      "mean_ms": 8.27,
+      "min_ms": 4.37,
+      "max_ms": 35.48,
+      "p50_ms": 7.57,
+      "p90_ms": 12.04,
+      "p95_ms": 13.37,
+      "p99_ms": 18.0,
+      "fps": 120.9
+    }
+  },
+  "system": {
+    "max_rss_mb": 150.8,
+    "platform": "darwin"
+  }
+}
