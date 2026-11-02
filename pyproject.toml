@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "captcha-mku"
+version = "2.0.0"
+description = "MKU CAPTCHA OCR CLI, SDK & FastAPI Microservice (100% Case-Sensitive ONNX CRNN)"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Thái Nguyên", email = "tn2k6@users.noreply.github.com" }
+]
+dependencies = [
+    "requests>=2.31.0",
+    "pillow>=10.0.0",
+    "ddddocr==1.6.1",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+train = [
+    "torch>=2.2.0",
+    "onnx>=1.15.0",
+    "onnxruntime>=1.17.0",
+]
+dev = [
+    "httpx>=0.27.0",
+]
+
+[project.scripts]
+captcha-mku = "captcha_ocr:main"
+
+[tool.setuptools]
+py-modules = ["captcha_ocr", "evaluate_ocr"]
+packages = ["app", "training"]
