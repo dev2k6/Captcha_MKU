@@ -92,7 +92,7 @@ Hoặc triển khai bằng Docker Compose:
 docker compose up -d --build
 ```
 
-Sau khi chạy, tài liệu Swagger UI tương tác có sẵn tại `http://localhost:28186/docs`:
+Sau khi chạy, tài liệu Swagger UI tương tác có sẵn tại `http://localhost:28186/docs` hoặc Production `https://captcha-portal-mku.dev.thainguyen.vn/docs`:
 - `GET /health` — Kiểm tra trạng thái server và model ONNX đang nạp.
 - `POST /api/v1/solve/mku` — Tự động lấy CAPTCHA mới từ cổng MKU và giải mã ngay trong ~5 ms.
 - `POST /api/v1/solve/base64` — Giải mã ảnh từ chuỗi Base64 hoặc Data URL (`data:image/png;base64,...`).

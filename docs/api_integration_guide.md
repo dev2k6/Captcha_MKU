@@ -16,7 +16,7 @@ Hệ thống cung cấp 3 phương thức tích hợp tùy theo kiến trúc c�
 
 ## 2. Đặc tả Chi tiết HTTP REST API
 
-Dịch vụ chạy mặc định tại cổng `28186`. Swagger UI tài liệu trực quan có tại: `http://localhost:28186/docs`.
+Dịch vụ chạy mặc định tại cổng `28186` (hoặc Production domain `https://captcha-portal-mku.dev.thainguyen.vn`). Swagger UI tài liệu trực quan có tại: `https://captcha-portal-mku.dev.thainguyen.vn/docs`.
 
 ### 2.1. Kiểm tra trạng thái hệ thống: `GET /health`
 - **Mục đích:** Health-check cho Load Balancer, Kubernetes liveness/readiness probe.
