@@ -17,6 +17,5 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Captured datasets and local temporary files
-data/
+# Local temporary files
 .coverage
