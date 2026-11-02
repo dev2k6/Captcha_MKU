@@ -6,8 +6,7 @@ import importlib
 import io
 import json
 import re
-from collections import Counter
-from typing import TYPE_CHECKING, Any, Callable, Iterable
+from typing import TYPE_CHECKING, Any
 
 import requests
 
@@ -19,6 +18,7 @@ else:
 
 API_URL = "https://apiportal.mku.edu.vn/api/authenticate/GetCaptcha"
 EXPECTED_CAPTCHA_LENGTH = 6
+TRAINED_CHARSET = ["", *"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"]
 HEADERS = {
     "accept": "application/json, text/plain, */*",
     "accept-language": "vi;q=0.9",
@@ -39,22 +39,8 @@ HEADERS = {
         "(KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
     ),
 }
-AMBIGUOUS_CHAR_MAP = {
-    "0": "oO",
-    "O": "0o",
-    "o": "0O",
-    "1": "ilI",
-    "I": "1il",
-    "i": "1lI",
-    "l": "1iI",
-    "5": "Ss",
-    "S": "5s",
-    "s": "5S",
-    "2": "Zz",
-    "Z": "2z",
-    "z": "2Z",
-}
 _DDDDOCR = None
+_ONNX_MODELS: dict[str, dict[str, Any]] = {}
 
 
 def _import_pillow_modules() -> tuple[Any, Any, Any, Any]:
@@ -90,6 +76,77 @@ def get_ddddocr_instance() -> Any:
     return _DDDDOCR
 
 
+def _load_custom_onnx_model(model_path: str | Any) -> dict[str, Any]:
+    """Load a trained captcha ONNX model and its adjacent charset metadata."""
+    from pathlib import Path
+
+    path = Path(model_path).expanduser().resolve()
+    if not path.is_file():
+        raise FileNotFoundError(f"OCR model file does not exist: {path}")
+    cache_key = str(path)
+    metadata_path = path.with_name("charsets.json")
+    if not metadata_path.is_file():
+        raise FileNotFoundError(f"OCR model metadata file does not exist: {metadata_path}")
+    signature = (
+        path.stat().st_mtime_ns,
+        path.stat().st_size,
+        metadata_path.stat().st_mtime_ns,
+        metadata_path.stat().st_size,
+    )
+    cached = _ONNX_MODELS.get(cache_key)
+    if cached is not None and cached["signature"] == signature:
+        return cached
+
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    charset = metadata.get("charset") if isinstance(metadata, dict) else None
+    if (
+        not isinstance(charset, list)
+        or charset != TRAINED_CHARSET
+    ):
+        raise ValueError("Trained OCR model must use the 63-class case-sensitive ASCII charset")
+
+    try:
+        ort = importlib.import_module("onnxruntime")
+    except ModuleNotFoundError as exc:
+        raise ModuleNotFoundError(
+            "Missing dependency 'onnxruntime'. Install it with 'pip install onnxruntime'."
+        ) from exc
+    session = ort.InferenceSession(str(path), providers=["CPUExecutionProvider"])
+    inputs = session.get_inputs()
+    outputs = session.get_outputs()
+    if not inputs or not outputs:
+        raise ValueError("Trained OCR model must have at least one input and output")
+    engine = {
+        "kind": "trained_onnx",
+        "path": str(path),
+        "session": session,
+        "input_name": inputs[0].name,
+        "output_name": outputs[0].name,
+        "charset": charset,
+        "signature": signature,
+    }
+    _ONNX_MODELS[cache_key] = engine
+    return engine
+
+
+def _select_engine(model_path: str | Any | None = None, *, builtin: bool = False) -> dict[str, Any]:
+    """Select the trained model when available, otherwise the built-in OCR."""
+    from pathlib import Path
+
+    if model_path is not None and builtin:
+        raise ValueError("Choose either --model or --builtin, not both")
+    if builtin:
+        return {"kind": "builtin_ddddocr", "instance": get_ddddocr_instance()}
+    if model_path is not None:
+        return _load_custom_onnx_model(model_path)
+
+    automatic_model = Path(__file__).resolve().parent / "models" / "captcha" / "model.onnx"
+    if automatic_model.is_file():
+        # A present default artifact is authoritative; load errors should be visible.
+        return _load_custom_onnx_model(automatic_model)
+    return {"kind": "builtin_ddddocr", "instance": get_ddddocr_instance()}
+
+
 def fetch_captcha() -> dict:
     """Gọi API captcha và trả về payload chứa ảnh dạng data URL cùng token phiên."""
     response = requests.get(API_URL, headers=HEADERS, timeout=30)
@@ -111,50 +168,8 @@ def decode_data_image(data_url: str) -> Image.Image:
 
 
 def normalize_text(text: str) -> str:
-    """Loại bỏ ký tự OCR nhiễu, chỉ giữ lại chữ và số."""
-    text = re.sub(r"[^A-Za-z0-9]", "", text)
-    return text.strip()
-
-
-def score_text(text: str, expected_min: int = EXPECTED_CAPTCHA_LENGTH, expected_max: int = EXPECTED_CAPTCHA_LENGTH) -> float:
-    """Chấm điểm heuristic cho chuỗi OCR dựa trên độ dài và mức hợp lý của captcha."""
-    if not text:
-        return 0.0
-    score = len(text) * 12.0
-    if expected_min <= len(text) <= expected_max:
-        score += 30.0
-    if text.isalnum():
-        score += 20.0
-    if re.search(r"[A-Za-z]", text):
-        score += 10.0
-    if re.search(r"\d", text):
-        score += 10.0
-    unique_ratio = len(set(text)) / max(len(text), 1)
-    score += unique_ratio * 10.0
-    score -= text.count("0") * 2.0
-    score -= text.count("1") * 2.0
-    return score
-
-
-def generate_text_variants(text: str, limit: int = 64) -> list[str]:
-    """Sinh các biến thể ký tự dễ nhầm để tăng cơ hội khớp khi OCR sai nhẹ."""
-    variants = [text]
-    for index, char in enumerate(text):
-        replacements = AMBIGUOUS_CHAR_MAP.get(char, "")
-        if not replacements:
-            continue
-
-        # Mở rộng theo từng vị trí ký tự mơ hồ, nhưng giới hạn số biến thể
-        # để tránh bùng nổ tổ hợp không cần thiết.
-        current = list(variants)
-        for variant in current:
-            for replacement in replacements:
-                candidate = variant[:index] + replacement + variant[index + 1 :]
-                if candidate not in variants:
-                    variants.append(candidate)
-                if len(variants) >= limit:
-                    return variants
-    return variants
+    """Chuẩn hóa chuỗi captcha: chỉ giữ chữ/số ASCII và giữ nguyên hoa/thường."""
+    return re.sub(r"[^A-Za-z0-9]", "", text)
 
 
 def upscale(image: Image.Image, scale: int = 3) -> Image.Image:
@@ -172,104 +187,274 @@ def preprocess_gray(image: Image.Image) -> Image.Image:
     return upscale(gray)
 
 
-def preprocess_binary(image: Image.Image) -> Image.Image:
-    """Nhị phân hóa ảnh để tách foreground/background khi captcha có nền đơn giản."""
-    gray = preprocess_gray(image)
-    bw = gray.point(lambda x: 255 if x > 170 else 0, mode="1")
-    return bw.convert("L")
-
-
-def preprocess_invert_binary(image: Image.Image) -> Image.Image:
-    """Đảo màu ảnh nhị phân để bắt các trường hợp OCR nhạy với polarity của ảnh."""
-    _, _, _, pil_image_ops = _import_pillow_modules()
-    bw = preprocess_binary(image)
-    return pil_image_ops.invert(bw)
-
-
-def preprocess_edges(image: Image.Image) -> Image.Image:
-    """Tăng cường biên nhằm giữ nét ký tự khi nền ảnh còn nhiều nhiễu."""
-    _, _, pil_image_filter, pil_image_ops = _import_pillow_modules()
-    gray = preprocess_gray(image)
-    edge = gray.filter(pil_image_filter.EDGE_ENHANCE_MORE)
-    edge = pil_image_ops.autocontrast(edge)
-    return edge
-
-
-def run_ddddocr(image: Image.Image) -> tuple[str, float]:
-    """Chạy OCR trên một ảnh đã tiền xử lý và trả về text cùng điểm heuristic."""
+def _image_bytes(image: Image.Image) -> bytes:
     buffer = io.BytesIO()
     image.save(buffer, format="PNG")
-    text = get_ddddocr_instance().classification(buffer.getvalue())
-    text = normalize_text(text)
-    return text, score_text(text)
+    return buffer.getvalue()
 
 
-def vote_text(candidates: list[tuple[str, float, str]]) -> str:
-    """Hợp nhất kết quả OCR từ nhiều pipeline bằng cơ chế mở rộng và bỏ phiếu có trọng số."""
-    valid_candidates = [item for item in candidates if item[0]]
-    if not valid_candidates:
-        return ""
-
-    expanded_candidates = []
-    for text, conf, pipeline in valid_candidates:
-        # Mỗi kết quả OCR được mở rộng thành các biến thể ký tự dễ nhầm,
-        # sau đó cộng thêm điểm heuristic để tăng xác suất chọn đúng captcha.
-        for variant in generate_text_variants(text):
-            variant_score = conf + score_text(variant)
-            expanded_candidates.append((variant, variant_score, pipeline))
-
-    counts = Counter(text for text, _, _ in expanded_candidates)
-    scored = []
-    for text, conf, pipeline in expanded_candidates:
-        # Chuỗi nào được nhiều pipeline/biến thể cùng ủng hộ sẽ nhận bonus đồng thuận.
-        consensus_bonus = counts[text] * 25.0
-        scored.append((text, conf + consensus_bonus, pipeline))
-
-    best_text, _, _ = max(scored, key=lambda item: item[1])
-    return best_text
+def _probability_rows(result: dict[str, Any]) -> tuple[Any, list[str]]:
+    """Đưa đầu ra ddddocr về ma trận (thời gian, ký tự) và bộ ký tự."""
+    np = importlib.import_module("numpy")
+    probabilities = np.asarray(result["probabilities"], dtype=float)
+    if probabilities.ndim == 3:
+        if probabilities.shape[0] == 1:  # batch, time, classes
+            probabilities = probabilities[0]
+        elif probabilities.shape[1] == 1:  # time, batch, classes
+            probabilities = probabilities[:, 0, :]
+        else:
+            raise ValueError("Unexpected OCR probability batch dimensions")
+    if probabilities.ndim != 2:
+        raise ValueError("OCR probabilities must have two dimensions after batch removal")
+    if probabilities.shape[0] == 0 or probabilities.shape[1] == 0:
+        raise ValueError("OCR probabilities must contain time steps and classes")
+    if not np.isfinite(probabilities).all() or (probabilities < 0).any():
+        raise ValueError("OCR probabilities must be finite and non-negative")
+    if (probabilities.sum(axis=1) <= 0).any():
+        raise ValueError("Each OCR probability row must have positive mass")
+    return probabilities, list(result["charset"])
 
 
-def solve_captcha(image: Image.Image) -> str:
-    """Điều phối toàn bộ quá trình giải captcha bằng nhiều pipeline tiền xử lý."""
-    pipelines: Iterable[tuple[str, Callable[[Image.Image], Image.Image]]] = (
-        ("ddddocr_gray", preprocess_gray),
-        ("ddddocr_binary", preprocess_binary),
-        ("ddddocr_invert_binary", preprocess_invert_binary),
-        ("ddddocr_edges", preprocess_edges),
-    )
+def _decode_with_confidence(result: dict[str, Any]) -> tuple[str, list[float]]:
+    """Greedy CTC decode and collect the selected case-sensitive class probability."""
+    np = importlib.import_module("numpy")
+    probabilities, charset = _probability_rows(result)
+    if not len(charset) or probabilities.shape[1] != len(charset):
+        raise ValueError("OCR probabilities do not match the model charset")
 
-    candidates = []
-    for name, processor in pipelines:
-        # Cùng một ảnh gốc được biến đổi theo nhiều cách để bù cho việc
-        # không có một pipeline đơn lẻ nào luôn tối ưu cho mọi captcha.
-        processed = processor(image)
-        text, conf = run_ddddocr(processed)
-        candidates.append((text, conf, name))
+    indices = np.argmax(probabilities, axis=1)
+    decoded: list[str] = []
+    confidences: list[float] = []
+    cursor = 0
+    while cursor < len(indices):
+        index = int(indices[cursor])
+        run_end = cursor + 1
+        while run_end < len(indices) and int(indices[run_end]) == index:
+            run_end += 1
 
-    return vote_text(candidates)
+        if index != 0:
+            char = charset[index]
+            if len(char) == 1 and char.isascii() and char.isalnum():
+                decoded.append(char)
+                confidence_by_timestep = probabilities[cursor:run_end, index]
+                confidences.append(float(confidence_by_timestep.max()))
+            else:
+                # Preserve the position as invalid so unsupported classes cannot
+                # disappear and make a shortened sequence look like a valid answer.
+                decoded.append("?")
+                confidences.append(
+                    float(probabilities[cursor:run_end, index].max())
+                )
+        cursor = run_end
+    return "".join(decoded), confidences
 
 
-def main() -> None:
-    """Entry point CLI: lấy captcha, OCR và in kết quả JSON ra stdout."""
-    parser = argparse.ArgumentParser(description="Bypass Captcha MKU - Lay captcha tu API MKU va OCR thanh text")
+def _trained_image_input(image: Image.Image) -> Any:
+    """Preprocess as the training encoder did: RGB resize, grayscale, [0, 1]."""
+    np = importlib.import_module("numpy")
+    pil_image, _, _, _ = _import_pillow_modules()
+    rgb = image.convert("RGB")
+    width = max(1, int(rgb.width * 64 / rgb.height))
+    resized = rgb.resize((width, 64), pil_image.Resampling.LANCZOS).convert("L")
+    pixels = np.asarray(resized, dtype=np.float32) / 255.0
+    return pixels[None, None, :, :].copy()
+
+
+def _trained_probabilities(image: Image.Image, engine: dict[str, Any]) -> dict[str, Any]:
+    np = importlib.import_module("numpy")
+    logits = engine["session"].run(
+        [engine["output_name"]],
+        {engine["input_name"]: _trained_image_input(image)},
+    )[0]
+    if logits.ndim != 3 or logits.shape[1] != 1 or logits.shape[2] != len(engine["charset"]):
+        raise ValueError(f"Unexpected trained OCR output shape: {logits.shape}")
+    if not np.isfinite(logits).all():
+        raise ValueError("Trained OCR model returned non-finite logits")
+    shifted = logits - logits.max(axis=2, keepdims=True)
+    exponentials = np.exp(shifted)
+    probabilities = exponentials / exponentials.sum(axis=2, keepdims=True)
+    return {"probabilities": probabilities, "charset": engine["charset"]}
+
+
+def _recognize_view(image: Image.Image, name: str, engine: dict[str, Any] | None = None) -> dict[str, Any]:
+    engine = engine or {"kind": "builtin_ddddocr", "instance": get_ddddocr_instance()}
+    if engine["kind"] == "trained_onnx":
+        result = _trained_probabilities(image, engine)
+    else:
+        result = engine["instance"].classification(_image_bytes(image), probability=True)
+    text, confidences = _decode_with_confidence(result)
+    return {
+        "view": name,
+        "text": text,
+        "character_confidences": confidences,
+        "valid_length": len(text) == EXPECTED_CAPTCHA_LENGTH
+        and all(char.isascii() and char.isalnum() for char in text),
+    }
+
+
+def solve_captcha_detailed(
+    image: Image.Image,
+    model_path: str | Any | None = None,
+    *,
+    builtin: bool = False,
+) -> dict[str, Any]:
+    """Recognize a captcha and return diagnostics from the selected OCR model."""
+    engine = _select_engine(model_path, builtin=builtin)
+    candidates = [_recognize_view(image, "raw", engine)]
+    if engine["kind"] == "builtin_ddddocr":
+        candidates.append(_recognize_view(preprocess_gray(image), "gray", engine))
+    elif not candidates[0]["valid_length"]:
+        pil_image, _, _, _ = _import_pillow_modules()
+        for scale, tag in ((1.05, "scale_up"), (0.95, "scale_down")):
+            scaled_w = max(1, int(image.width * scale))
+            scaled_img = image.resize((scaled_w, image.height), pil_image.Resampling.LANCZOS)
+            view_res = _recognize_view(scaled_img, tag, engine)
+            candidates.append(view_res)
+            if view_res["valid_length"]:
+                break
+    eligible = [candidate for candidate in candidates if candidate["valid_length"]]
+
+    if not eligible:
+        text = ""
+        confidence = []
+    else:
+        text = "".join(
+            max(
+                (candidate for candidate in eligible),
+                key=lambda candidate: candidate["character_confidences"][position],
+            )["text"][position]
+            for position in range(EXPECTED_CAPTCHA_LENGTH)
+        )
+        confidence = [
+            max(
+                candidate["character_confidences"][position]
+                for candidate in eligible
+            )
+            for position in range(EXPECTED_CAPTCHA_LENGTH)
+        ]
+
+    disagreement = len({candidate["text"] for candidate in candidates}) > 1
+    return {
+        "text": normalize_text(text),
+        "confidence": confidence,
+        "needs_review": (
+            len(text) != EXPECTED_CAPTCHA_LENGTH
+            or disagreement
+            or not confidence
+            or min(confidence) < 0.8
+        ),
+        "candidates": candidates,
+        "engine": engine["kind"],
+    }
+
+
+def solve_captcha(
+    image: Image.Image,
+    model_path: str | Any | None = None,
+    *,
+    builtin: bool = False,
+) -> str:
+    """Return six case-sensitive characters, or empty if no valid result exists."""
+    return solve_captcha_detailed(image, model_path, builtin=builtin)["text"]
+
+
+def _add_solve_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--save-image", help="Luu anh captcha goc ra file")
-    args = parser.parse_args()
+    parser.add_argument("--image", help="Doc anh captcha tu file thay vi goi API")
+    parser.add_argument("--debug", action="store_true", help="Them diem tin cay OCR de chan doan")
+    model_group = parser.add_mutually_exclusive_group()
+    model_group.add_argument("--model", help="Duong dan den model ONNX OCR da train")
+    model_group.add_argument("--builtin", action="store_true", help="Ep dung model OCR ddddocr mac dinh")
 
-    payload = fetch_captcha()
-    image = decode_data_image(payload["img"])
+
+def _run_solve_cli(args: argparse.Namespace) -> None:
+    if args.image:
+        _, _, _, _ = _import_pillow_modules()
+        pil_image = importlib.import_module("PIL.Image")
+        image = pil_image.open(args.image).convert("RGB")
+        buffer = _image_bytes(image)
+        image_data = "data:image/png;base64," + base64.b64encode(buffer).decode("ascii")
+        token = None
+    else:
+        payload = fetch_captcha()
+        image_data = payload["img"]
+        image = decode_data_image(image_data)
+        token = payload["token"]
 
     if args.save_image:
         image.save(args.save_image)
 
-    result_text = solve_captcha(image)
+    diagnostics = solve_captcha_detailed(image, args.model, builtin=args.builtin)
+    result_text = diagnostics["text"]
     result = {
-        "status": bool(result_text),
-        "captcha": payload["img"],
+        "status": len(result_text) == EXPECTED_CAPTCHA_LENGTH,
+        "captcha": image_data,
         "text": result_text,
-        "token": payload["token"],
+        "token": token,
     }
+    if args.debug:
+        result["ocr"] = {
+            "confidence": diagnostics["confidence"],
+            "needs_review": diagnostics["needs_review"],
+            "candidates": diagnostics["candidates"],
+            "engine": diagnostics["engine"],
+        }
 
     print(json.dumps(result, ensure_ascii=False))
+
+
+def main(argv: list[str] | None = None) -> None:
+    """Unified CLI entry point: solve (default), serve, benchmark, evaluate, train."""
+    import sys
+
+    args_list = list(sys.argv[1:] if argv is None else argv)
+    subcommands = {"solve", "serve", "benchmark", "evaluate", "train"}
+
+    if args_list and args_list[0] in subcommands:
+        cmd = args_list[0]
+        rest = args_list[1:]
+        if cmd == "solve":
+            parser = argparse.ArgumentParser(prog="captcha-mku solve", description="Giai ma anh CAPTCHA MKU")
+            _add_solve_arguments(parser)
+            _run_solve_cli(parser.parse_args(rest))
+            return
+        if cmd == "serve":
+            parser = argparse.ArgumentParser(prog="captcha-mku serve", description="Khoi chay FastAPI Microservice")
+            parser.add_argument("--host", default="0.0.0.0", help="Host bind address (default: 0.0.0.0)")
+            parser.add_argument("--port", type=int, default=28186, help="Port number (default: 28186)")
+            parser.add_argument("--reload", action="store_true", help="Enable auto-reload for development")
+            serve_args = parser.parse_args(rest)
+            uvicorn = importlib.import_module("uvicorn")
+            uvicorn.run("app.main:app", host=serve_args.host, port=serve_args.port, reload=serve_args.reload)
+            return
+        if cmd == "benchmark":
+            parser = argparse.ArgumentParser(prog="captcha-mku benchmark", description="Chay benchmark 500 anh va xuat HTML")
+            parser.add_argument("--report-only", action="store_true", help="Chi xuat lai file HTML tu JSON co san")
+            bench_args = parser.parse_args(rest)
+            if bench_args.report_only:
+                from training.generate_report import build_light_html
+                build_light_html()
+            else:
+                from training.run_benchmark import main as run_bench_main
+                run_bench_main()
+            return
+        if cmd == "evaluate":
+            from evaluate_ocr import main as eval_main
+            eval_main(rest)
+            return
+        if cmd == "train":
+            from training.train import main as train_main
+            train_main(rest)
+            return
+
+    parser = argparse.ArgumentParser(
+        description=(
+            "MKU CAPTCHA OCR CLI & Microservice. "
+            "Subcommands: solve (default), serve, benchmark, evaluate, train."
+        )
+    )
+    _add_solve_arguments(parser)
+    _run_solve_cli(parser.parse_args(args_list))
 
 
 if __name__ == "__main__":
