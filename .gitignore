@@ -1,8 +1,11 @@
-﻿__pycache__/
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
+*.egg-info/
+build/
+dist/
 .venv/
 venv/
 env/
@@ -13,3 +16,9 @@ ENV/
 Thumbs.db
 .vscode/
 .idea/
+
+# Captured datasets, local checkpoints and generated evaluation reports
+data/
+models/
+reports/
+.coverage
