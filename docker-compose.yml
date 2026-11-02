@@ -1,0 +1,16 @@
+services:
+  captcha-mku-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: captcha-mku-api
+    ports:
+      - "28186:28186"
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:28186/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

@@ -1,0 +1,14 @@
+.git
+.venv
+venv
+__pycache__
+*.pyc
+.DS_Store
+data/
+reports/
+models/captcha_500/
+models/captcha_2000_backup/
+models/captcha/best.pt
+models/captcha/training.jsonl
+tests/
+training/
